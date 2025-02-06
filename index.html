@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css"> -->
+
+    <title>CodeSIM</title>
+    <style>
+        body {
+            font-family: 'Poppins';
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            text-align:justify;
+        }
+
+        .container {
+            max-width: 59rem;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .link-block {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .external-link {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border-radius: 0.1rem;
+            transition: background-color 0.3s;
+            border-radius: 0.3rem;
+
+            display: flex;
+            flex-direction: row;
+            gap: 0.2rem;
+        }
+
+        .icon {
+            margin-top: 0.2rem;
+        }
+
+        .gray-border {
+            border: 0.1rem solid gray;
+            border-collapse: collapse;
+        }
+
+        .black-border {
+            border: 0.5rem solid black;
+            border-collapse: collapse;
+        }
+
+        .bg-gray {
+            background-color: gainsboro;
+        }
+
+        .center-align {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .dark-font {
+            color: black;
+            font-weight: bolder;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center; margin-top: 3rem;">CodeSIM</h1>
+        <h2 style="text-align: center; margin-top: -1.5rem; font-weight: 500">Multi-Agent Code Generation and Problem Solving through Simulation-Driven Planning and Debugging</h2>
+
+        <h4 style="text-align: center; margin-top: -1rem; font-weight: 500">
+            <a href="https://cse.buet.ac.bd/faculty_list/detail/mdashraful">Md. Ashraful Islam</a>
+            <sup style="color: green">*1</sup>,
+            <a href="https://sites.google.com/site/mohammedeunusali/">Mohammed Eunus Ali</a>
+            <sup style="color: green">1</sup>,
+            <a href="https://rizwan09.github.io/">Md Rizwan Parvez</a>
+            <sup style="color: orangered">2</sup>
+        </h4>
+
+        <p style="text-align: center; margin-top: -1rem; font-weight: 500; font-size: medium;">
+            <sup style="color: green">1</sup>
+            Bangladesh University of Engineering and Technology (BUET)
+        </p>
+        <p style="text-align: center; margin-top: -1.2rem; font-weight: 500; font-size: medium;">
+            <sup style="color: orangered">2</sup>
+            Qatar Computing Research Institute (QCRI)
+        </p>
+        <p style="text-align: center; margin-top: -1.2rem; font-weight: 500; font-size: medium;">
+            <sup style="color: orangered">*</sup>
+            Work done when working as a remote RA at QCRI.
+        </p>
+
+        <div style="margin-top: 1rem;"></div>
+
+        <span class="link-block">
+            <a href="http://arxiv.org" class="external-link" style="background-color:gray">
+                <span class="material-symbols-outlined icon">picture_as_pdf</span>
+                <span>arXiv</span>
+            </a>
+
+            <a href="https://github.com/kagnlp/CodeGenerator" class="external-link" style="background-color:gray">
+                <span class="material-symbols-outlined icon">code</span>
+                <span>code</span>
+            </a>
+            <a href="#results" class="external-link" style="background-color:gray">
+                <span class="material-symbols-outlined icon">trophy</span>
+                <span>results</span>
+            </a>
+        </span>
+
+        <div style="align-items: center; text-align: center;">
+
+            <img src="images/CodeSIM-Overview.png" alt="Overview" style="width: 100%; margin-top: 1rem; margin-top: 2rem;">
+            <p> 
+                Figure: Overview of CodeSIM: It consists of three agents—planning, coding, and debugging. The <i>Planning Agent</i> first generates an exemplar problem-solution (i.e., via self-retrieval) and devises a plan, which is then verified and refined through simulation. Next, the <i>Coding Agent</i> implements the plan. Finally, the <i>Debugging Agent</i> addresses potential bugs through step-wise simulation across <i>d</i> trials. The entire process iterates <i>p</i> times.
+            </p>
+        </div>
+        <h2 style="text-align: center;">Introduction</h2>
+        <p>
+            Large Language Models (LLMs) have made significant strides in code generation and problem solving. Current approaches employ external tool-based iterative debuggers that use compiler or other tool-based runtime feedback to refine coarse programs generated by various methods. However, the effectiveness of these approaches heavily relies on the quality of the initial code generation, which remains an open challenge. In this paper, we introduce CodeSIM, a novel multi-agent code generation framework that comprehensively addresses the stages of program synthesis—planning, coding, and debugging—through a human-like perception approach. As human verifies their understanding of any algorithms through visual simulation, CodeSIM uniquely features a method of plan verification and internal debugging through the step-by-step simulation of input/output. Extensive experiments across seven challenging competitive problem-solving and program synthesis benchmarks demonstrate CodeSIM's remarkable code generation capabilities. Our framework achieves new state-of-the-art (pass@1) results—(<b>HumanEval 95.1%, MBPP 90.7%, APPS 22%, and CodeContests 29.1%</b>). Furthermore, our method shows potential for even greater enhancement when cascaded    with external debuggers.
+        </p>
+
+
+        <h2 style="text-align: center;">CodeSIM Overview</h2>
+        Our goal is to develop a multi-agent code generation approach capable of complex problem solving. Drawing inspiration from recent works like <a href="https://md-ashraful-pramanik.github.io/mapcoder.github.io/">MapCoder</a> and <a href="https://chatdev.toscl.com/">ChatDev</a> (in a different context), we devise the agents in CodeSIM for planning, coding, and debugging. While these existing approaches focus primarily on expanding steps without verifying underlying hypotheses, we address this limitation by introducing a novel verification approach. Our approach simulates input/output step-by-step, verifying generated plans and performing internal debugging, mirroring how humans understand, visualize, and refine in algorithm development. Below, we present our proposed model.
+
+        <h3 style="display: flex;"><span class="material-symbols-outlined icon">double_arrow</span>Planning Agent</h3>
+        The first component of CodeSIM is the <i>Planning Agent</i>. Given a problem description, the <i>Planning Agent</i> generates a single exemplar—a relevant problem along with its plan and solution. This mimics the behavior of human programmers, who, when faced with a new problem, first recall a similar problem they've previously solved. This exemplar-based recall is crucial as it provides a starting point for constructing a solution plan. Instead of generating multiple ungrounded exemplars as in MapCoder, our agent focuses on only one at a time. We then instruct the LLM to generate an appropriate plan. Once the plan is created, the LLM simulates (step-by-step) the solution with a sample input. If the simulation result does not match the expected output, the agent prompts the LLM to revise the plan. Otherwise, the plan is deemed valid. In the case of failure, the <i>Planning Agent</i> refines the plan. 
+
+        <h3 style="display: flex;"><span class="material-symbols-outlined icon">double_arrow</span>Coding Agent</h3>
+        Next component is the <i>Coding Agent</i>, which takes the problem description and the plan generated by the <i>Planning Agent</i> as input. The role of this agent is to translate the plan into executable code that solves the given problem. Once the code is generated, CodeSIM evaluates it using sample input/output test cases. If the code passes all sample tests, it is returned as the final solution. Otherwise, the code is handed over to the next agent for further refinement. 
+
+        <h3 style="display: flex;"><span class="material-symbols-outlined icon">double_arrow</span>Debugging Agent</h3>
+        The final component, the <i>Debugging Agent</i>, receives the original problem, the plan from the <i>Planning Agent</i>, the code generated by the <i>Coding Agent</i>, and the execution (unit testing) log as input to debug the code. To identify bugs, instead of directly prompting the LLMs, we uniquely leverage the simulation once again. The LLM is instructed specifically to simulate the code on inputs where it fails to produce the expected output, allowing it to trace the execution step by step and locate the error. Once the bug is identified, the LLM modifies the code to resolve the issue.
+
+        <br>
+        <br>
+        <h2 style="text-align: center;" id="results">Results</h2>
+
+        <h3 style="display: flex;"><span class="material-symbols-outlined icon">double_arrow</span>Results on Basic Programming Problems</h3>
+        <div style="align-items: center; text-align: center;">
+            <img src="images/basic-results.png" alt="Basic Results" style="width: 100%; margin-top: 0.5rem;">
+            <p> Table: Pass@1 results for different approaches on basic programming tasks. </p>
+        </div>
+        <p>
+            Overall, CodeSIM demonstrates consistently superior performance compared to all other baselines across all datasets and LLMs. Notably, CodeSIM achieves top scores with GPT-4o, reaching <b>95.1%</b> on HumanEval, <b>87.2%</b> on EvalPlus, and <b>90.7%</b> on MBPP, resulting in an impressive <b>82.7%</b> overall average and their new state-of-the-art (SoTA) results. This represents a significant improvement over the next best /method, MapCoder, which scores <b>79.0%</b> on average with GPT-4o. CodeSIM's effectiveness is consistent across different model variants, outperforming other approaches with ChatGPT (75.1% avg) and GPT-4 (81.3% avg) as well. The method's robust performance across diverse datasets, including the challenging MBPP-ET where it achieves 61.5% with GPT-4, underscores its versatility in handling various programming tasks. These results strongly indicate that CodeSIM's simulation-driven planning and debugging approach marks a substantial advancement in code generation and problem-solving capabilities, as it consistently outperformed other baselines.
+        </p>
+
+        <h3 style="display: flex;"><span class="material-symbols-outlined icon">double_arrow</span>Results on Contest Level Programming Problems</h3>
+        <div style="align-items: center; text-align: center;">
+            <img src="images/contest-results.png" alt="Contest Results" style="width: 50%; margin-top: 0.5rem;">         
+            <p> Table: Pass@1 results for different approaches on CodeContest and APPS dataset. </p>
+        </div>
+        <p>
+            We evaluate performance on complex, contest-level code generation tasks. CodeSIM delivers significant improvements over other baselines in solving complex contest-level code generation tasks. With GPT-4, CodeSIM reaches a strong <b>29.1%</b> on CodeContests and <b>22.0%</b> on APPS, marking a consistent edge over MapCoder's <b>25.3%</b> average. The performance gains are even more pronounced with ChatGPT, where CodeSIM achieves a 16.4% on CodeContests, and 12.0% on APPS resulting <b>14.2%</b> overall, outperforming MapCoder's 12.0%. These results highlight CodeSIM's ability to handle the complexity of contest-level problems more effectively, especially through its simulation-driven approach.
+        </p>
+
+        <h3 style="display: flex;"><span class="material-symbols-outlined icon">double_arrow</span>Results on Open Source LLMs</h3>
+        <div style="align-items: center; text-align: center;">
+            <img src="images/opensource-llm-results.png" alt="Contest Results" style="width: 50%; margin-top: 0.5rem;">         
+            <p> Table: Pass@1 results for different approaches using Open-source LLMs. </p>
+        </div>
+        <p>
+            To further demonstrate CodeSIM's generalization capability, we evaluate its performance with open-source LLMs, including Gemma2-9B, Mixtral8x7B, LLaMa3.1-8B, and LLaMa3.1-70B. As shown in the above table, CodeSIM consistently outperforms all other methods across these models. On LLaMa3.1-70B, CodeSIM achieves an accuracy of <b>90.2%</b> on HumanEval and <b>76.2%</b> on EvalPlus, with an average of <b>80.1%</b>, closely matching GPT-4o's performance. Due to the complex prompting scheme of MapCoder, open-source LLMs often struggle to generate output in the correct format. Therefore, we exclude MapCoder from this experiment. On the other hand, Reflexion shows minimal improvement in accuracy. These results highlight CodeSIM's strong generalization ability across various LLM architectures, even on smaller models like Gemma2-9B that achieves a notable avg accuracy of <b>75.8%</b>.
+        </p>
+
+        <!-- <h2 style="text-align: center;" >Cite Us</h2>
+        <pre>
+
+        </pre> -->
+
+    </div>
+</body>
+
+</html>
